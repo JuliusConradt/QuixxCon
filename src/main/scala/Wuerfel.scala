@@ -14,8 +14,7 @@ object Wuerfel {
     Wurf
   }
 
-  def printwurf(): Unit = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet in die Konsole aus
-    val Wurf = wuerfeln()
+  def printwurf(Wurf: Array[Int]): Unit = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet in die Konsole aus
     printf("%s%d  %d  %s%d  %s%d  %s%d  %s%d", Spielfeld.white, Wurf(0),
       Wurf(1),
       Spielfeld.red, Wurf(2),
