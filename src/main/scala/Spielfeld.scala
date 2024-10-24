@@ -1,4 +1,4 @@
-object Spielfeld {
+class Spielfeld {
   val red = "\u001B[31m"
   val yellow = "\u001B[33m"
   val green = "\u001B[32m"

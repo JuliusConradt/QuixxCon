@@ -1,6 +1,8 @@
 import scala.util.Random
 
-object Wuerfel {
+class Wuerfel {
+
+  val Spielfeld = new Spielfeld
   def random(): Int = { //Return: Zufälliger Integer von 1 bis 6
     val random = new Random()
     random.nextInt(6) + 1
