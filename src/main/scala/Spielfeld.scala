@@ -8,7 +8,7 @@ object Spielfeld {
   val ryline = "|  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  | [ ] |"
   val gbline = "| 12  | 11  | 10  |  9  |  8  |  7  |  6  |  5  |  4  |  3  |  2  | [ ] |"
 
-  def main(args: Array[String]): Unit = {
+  def emptyfield(): Unit = {
     println("Welcome to Quixx")
     printf("%s%s%n%s%n%s%n", red, mesh, ryline, mesh)
     printf("%s%s%n%s%n%s%n", yellow, mesh, ryline, mesh)
