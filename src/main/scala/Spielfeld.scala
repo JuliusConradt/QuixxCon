@@ -15,8 +15,6 @@ class Spielfeld {
     printf("%s%s%n%s%n%s%n", yellow, mesh, ryline, mesh)
     printf("%s%s%n%s%n%s%n", green, mesh, gbline, mesh)
     printf("%s%s%n%s%n%s%n%s", blue, mesh, gbline, mesh, white)
-    println("Julius Branch")
     printf("%s%n", fails)
-    println("Linus Branch")
   }
 }
