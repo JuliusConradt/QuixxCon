@@ -9,12 +9,14 @@ class Spielfeld {
   val gbline = "| 12  | 11  | 10  |  9  |  8  |  7  |  6  |  5  |  4  |  3  |  2  | [ ] |"
   val fails = "FEHLWURF  []  []  []  []  []"
 
-  def emptyfield(): Unit = { //gibt ein leeres Spielfeld aus
-    println("Welcome to Quixx")
-    printf("%s%s%n%s%n%s%n", red, mesh, ryline, mesh)
-    printf("%s%s%n%s%n%s%n", yellow, mesh, ryline, mesh)
-    printf("%s%s%n%s%n%s%n", green, mesh, gbline, mesh)
-    printf("%s%s%n%s%n%s%n%s", blue, mesh, gbline, mesh, white)
-    printf("%s%n", fails)
+  def emptyfield(): String = { //gibt ein leeres Spielfeld aus
+    val sb = new StringBuilder()
+    sb.append("Welcome to Quixx \n")
+    sb.append(red + mesh +"\n" + ryline + "\n" + mesh + "\n")
+    sb.append(yellow + mesh + "\n" + ryline + "\n" + mesh + "\n")
+    sb.append(green + mesh + "\n" + gbline + "\n" + mesh + "\n")
+    sb.append(blue + mesh + "\n" + gbline + "\n" + mesh + "\n")
+    sb.append(white + fails + "\n")
+    sb.toString()
   }
 }

@@ -16,12 +16,14 @@ class Wuerfel {
     Wurf
   }
 
-  def printwurf(Wurf: Array[Int]): Unit = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet in die Konsole aus
-    printf("%s%d  %d  %s%d  %s%d  %s%d  %s%d", Spielfeld.white, Wurf(0),
-      Wurf(1),
-      Spielfeld.red, Wurf(2),
-      Spielfeld.yellow, Wurf(3),
-      Spielfeld.green, Wurf(4),
-      Spielfeld.blue, Wurf(5))
+  def printwurf(Wurf: Array[Int]): String = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet in die Konsole aus
+    val sb = new StringBuilder()
+    sb.append(Spielfeld.white + Wurf(0) + " " +
+      Wurf(1) + " " +
+      Spielfeld.red + Wurf(2) + " " +
+      Spielfeld.yellow + Wurf(3) + " " +
+      Spielfeld.green + Wurf(4) + " " +
+      Spielfeld.blue + Wurf(5))
+    sb.toString()
   }
 }
