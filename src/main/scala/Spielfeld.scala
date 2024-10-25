@@ -17,5 +17,6 @@ class Spielfeld {
     printf("%s%s%n%s%n%s%n%s", blue, mesh, gbline, mesh, white)
     println("Julius Branch")
     printf("%s%n", fails)
+    println("Linus Branch")
   }
 }
