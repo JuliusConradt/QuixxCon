@@ -16,7 +16,7 @@ class Wuerfel {
     Wurf
   }
 
-  def printwurf(Wurf: Array[Int]): String = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet in die Konsole aus
+  def printwurf(Wurf: Array[Int]): String = { //Return: wuerfelt und gibt den Wurf farblich gekennzeichnet zurück
     val sb = new StringBuilder()
     sb.append(Spielfeld.white + Wurf(0) + " " +
       Wurf(1) + " " +
