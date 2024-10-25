@@ -15,6 +15,6 @@ class Spielfeld {
     printf("%s%s%n%s%n%s%n", yellow, mesh, ryline, mesh)
     printf("%s%s%n%s%n%s%n", green, mesh, gbline, mesh)
     printf("%s%s%n%s%n%s%n%s", blue, mesh, gbline, mesh, white)
-    printf("%s%n", fails)
+    printf("Julius%s%n", fails)
   }
 }
