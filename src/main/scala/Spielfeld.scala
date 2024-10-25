@@ -7,7 +7,7 @@ class Spielfeld {
   val mesh = ("+" + ("-") * 5) * 12 + "+"
   val ryline = "|  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  | [ ] |"
   val gbline = "| 12  | 11  | 10  |  9  |  8  |  7  |  6  |  5  |  4  |  3  |  2  | [ ] |"
-  val fails = "Fehlwürfe |  []  []  []  []  []"
+  val fails = "FEHLWURF  []  []  []  []  []"
 
   def emptyfield(): Unit = { //gibt ein leeres Spielfeld aus
     println("Welcome to Quixx")
