@@ -10,7 +10,8 @@ object TUI {
   def printWurfTUI(w: Array[Int]) : Int = {
     val Wuerfel = new Wuerfel
     println(Wuerfel.printwurf(w))
-    println("Wähle eine der folgenden Kombinationen, bestätige deinen Fehlwurf mit 'F' oder gebe das Spiel weiter mit 'N'")
+    println("Wähle eine der folgenden Kombinationen, bestätige deinen Fehlwurf mit 'F' oder wähle die weiteren Kombinationen 'N'")
+    println(w(0)+w(1))
     val input = StdIn.readLine()
     if (input == "F") return 0
     else if (input == "N") return 1
@@ -18,8 +19,8 @@ object TUI {
   }
 
   def printUserWurf(w: Array[Int]): Int = {
-    println(w(0)+w(1))
     println("Wähle eine der folgenden Kombination oder gebe das Spiel weiter mit 'N'")
+    println(w(0)+w(1))
     val input = StdIn.readLine()
     if (input == "N") return 1
     1 + input.toInt
