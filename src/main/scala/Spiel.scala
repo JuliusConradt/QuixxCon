@@ -1,11 +1,13 @@
 class Spiel(val Spieler: Array[Spieler]) {
 
-  var Runde = 1
-  var Master = 0 //Spieler der gewürfelt hat --> Spieler(Master)
-  val rclosed = false
-  val yclosed = false
-  val gclosed = false
-  val bclosed = false
+  var Runde = 0
+  var Master = -1
+  var User = Master
+  var rclosed = false
+  var yclosed = false
+  var gclosed = false
+  var bclosed = false
+  var beendet = false
 
   def CanBeClosed(r: Reihe):Boolean = {
     val alreadyclosed = r.Typ match {
@@ -18,6 +20,24 @@ class Spiel(val Spieler: Array[Spieler]) {
     r.count > 4
   }
 
+  def nextRound():Unit = {
+    User = Master
+    Runde += 1
+    Master = (Master + 1) % Spieler.length
+    TUI.printFieldTUI(Spieler(User),this)
+    val Wuerfel = new Wuerfel
+    var masterchoice = TUI.printWurfTUI(Wuerfel)
+    if(masterchoice == 0){
+      Spieler(User).Feld.fwcount += 1
+      //Next field
+    } else if (masterchoice == 1) {
+      //Farbige Kombinationen ausgeben
+    } else {
+      //Zum Spielfeld addieren
+    }
+
+  }
+
   def Ankreuzen(r: Reihe, wert: Int):Reihe = {
     if (r.Typ == 1 || r.Typ == 2){
       r.Kreuze(wert - 2) = true
@@ -27,13 +47,6 @@ class Spiel(val Spieler: Array[Spieler]) {
     r.Kreuze(12 - wert) = true
     r.count += 1
     r
-  }
-
-  def NextRound():Unit = {
-    Runde += 1
-    Master = (Master + 1) % Spieler.size
-    //Spielfeld von Master
-    //Würfeln
   }
 
   def Punktzahl(rcount:Int, ycount:Int, gcount:Int, bcount:Int, fwcount:Int):Int = {

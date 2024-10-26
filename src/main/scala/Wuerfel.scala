@@ -23,7 +23,7 @@ class Wuerfel {
       Spielfeld.red + Wurf(2) + " " +
       Spielfeld.yellow + Wurf(3) + " " +
       Spielfeld.green + Wurf(4) + " " +
-      Spielfeld.blue + Wurf(5))
+      Spielfeld.blue + Wurf(5) + Spielfeld.white)
     sb.toString()
   }
 }

@@ -20,16 +20,10 @@ class Feldprint {
     sb.toString()
   }
 
-  //FELD PRINTEN:
-  //mesh
-  //durch erste Reihe iterieren
-  //Für jedes true den betroffenen Teil im ryline mit einem x replacen
-  //reihe printen
-  //
 
   def fieldprint(p: Spieler, s:Spiel):String = {
     val sb = new StringBuilder()
-    sb.append(white + "Spielfeld von Spieler " + p.name + "  |  Runde: " + s.Runde + "\n")
+    sb.append("\n\n"+white + "Spielfeld von Spieler " + p.name + "  |  Runde: " + s.Runde + "\n")
     sb.append(red + mesh + "\n")
     sb.append(writeRedLine(p.Feld.Red))
     sb.append(mesh + "\n")
@@ -42,7 +36,7 @@ class Feldprint {
     sb.append(blue + mesh + "\n")
     sb.append(writeBlueLine(p.Feld.Blue))
     sb.append(mesh + "\n")
-    sb.append(fails.substring(0,7))
+    sb.append(white + fails.substring(0,8))
     val fw = " [X]" * p.Feld.fwcount
     val nfw = " [ ]" * (4 - p.Feld.fwcount)
     sb.append(fw + nfw +"\n")
@@ -53,12 +47,12 @@ class Feldprint {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+red+"  ")
-      else sb.append(ryline.substring(i*6,i*6+5))
+      else sb.append(ryline.substring(i*6,i*6+6))
     }
     sb.append("| [")
     if (r.Kreuze(11)) sb.append(white+"X"+red)
     else sb.append(" ")
-    sb.append(" |\n")
+    sb.append("] |\n")
     sb.toString()
   }
 
@@ -66,12 +60,12 @@ class Feldprint {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+yellow+"  ")
-      else sb.append(ryline.substring(i*6,i*6+5))
+      else sb.append(ryline.substring(i*6,i*6+6))
     }
     sb.append("| [")
     if (r.Kreuze(11)) sb.append(white+"X"+yellow)
     else sb.append(" ")
-    sb.append(" |\n")
+    sb.append("] |\n")
     sb.toString()
   }
 
@@ -79,12 +73,12 @@ class Feldprint {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+green+"  ")
-      else sb.append(gbline.substring(i*6,i*6+5))
+      else sb.append(gbline.substring(i*6,i*6+6))
     }
     sb.append("| [")
     if (r.Kreuze(11)) sb.append(white+"X"+green)
     else sb.append(" ")
-    sb.append(" |\n")
+    sb.append("] |\n")
     sb.toString()
   }
 
@@ -92,12 +86,12 @@ class Feldprint {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+blue+"  ")
-      else sb.append(gbline.substring(i*6,i*6+5))
+      else sb.append(gbline.substring(i*6,i*6+6))
     }
     sb.append("| [")
     if (r.Kreuze(11)) sb.append(white+"X"+blue)
     else sb.append(" ")
-    sb.append(" |\n")
+    sb.append("] |\n")
     sb.toString()
   }
 }
