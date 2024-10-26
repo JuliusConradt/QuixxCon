@@ -1,4 +1,22 @@
-class Regeln {
+class Spiel {
+
+  val Spieler: Array[Spieler] = Array()
+  val rclosed = false
+  val yclosed = false
+  val gclosed = false
+  val bclosed = false
+
+  def CanBeClosed(r: Reihe):Boolean = {
+    val alreadyclosed = r.Typ match {
+      case 1 => rclosed
+      case 2 => yclosed
+      case 3 => gclosed
+      case 4 => bclosed
+    }
+    if (alreadyclosed) return false
+    r.count > 4
+  }
+
   def Punktzahl(rcount:Int, ycount:Int, gcount:Int, bcount:Int, fwcount:Int):Int = {
     SubPunkte(rcount) + SubPunkte(ycount) + SubPunkte(gcount) + SubPunkte(bcount) - 5*fwcount
   }
