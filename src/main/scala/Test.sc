@@ -1,2 +1,1 @@
-
-printf("4")
+print("ABC")

@@ -1,6 +1,7 @@
-class Spiel {
+class Spiel(val Spieler: Array[Spieler]) {
 
-  val Spieler: Array[Spieler] = Array()
+  var Runde = 1
+  var Master = 0 //Spieler der gewürfelt hat --> Spieler(Master)
   val rclosed = false
   val yclosed = false
   val gclosed = false
@@ -15,6 +16,24 @@ class Spiel {
     }
     if (alreadyclosed) return false
     r.count > 4
+  }
+
+  def Ankreuzen(r: Reihe, wert: Int):Reihe = {
+    if (r.Typ == 1 || r.Typ == 2){
+      r.Kreuze(wert - 2) = true
+      r.count += 1
+      return r
+    }
+    r.Kreuze(12 - wert) = true
+    r.count += 1
+    r
+  }
+
+  def NextRound():Unit = {
+    Runde += 1
+    Master = (Master + 1) % Spieler.size
+    //Spielfeld von Master
+    //Würfeln
   }
 
   def Punktzahl(rcount:Int, ycount:Int, gcount:Int, bcount:Int, fwcount:Int):Int = {

@@ -1,12 +1,12 @@
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 
-class SpielfeldSpec extends AnyWordSpec with Matchers {
+class FeldprintSpec extends AnyWordSpec with Matchers {
 
   "The Spielfeld class" should {
 
     "generate an empty game field with emptyfield()" in {
-      val spielfeld = new Spielfeld
+      val spielfeld = new Feldprint
       val emptyFieldOutput = spielfeld.emptyfield()
 
       // Check that the empty field output starts with the welcome message

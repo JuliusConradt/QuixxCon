@@ -2,7 +2,7 @@ import scala.util.Random
 
 class Wuerfel {
 
-  val Spielfeld = new Spielfeld
+  val Spielfeld = new Feldprint
   def random(): Int = { //Return: Zufälliger Integer von 1 bis 6
     val random = new Random()
     random.nextInt(6) + 1
