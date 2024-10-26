@@ -7,12 +7,21 @@ object TUI {
     println(Feldprint.fieldprint(p,s))
   }
 
-  def printWurfTUI(w: Wuerfel) : Int = {
-    println(w.printwurf(w.wuerfeln()))
-    println("Whähle eine der folgenden Kombinationen oder bestätige deinen Fehlwurf mit 'F'")
+  def printWurfTUI(w: Array[Int]) : Int = {
+    val Wuerfel = new Wuerfel
+    println(Wuerfel.printwurf(w))
+    println("Wähle eine der folgenden Kombinationen, bestätige deinen Fehlwurf mit 'F' oder gebe das Spiel weiter mit 'N'")
     val input = StdIn.readLine()
     if (input == "F") return 0
     else if (input == "N") return 1
+    1 + input.toInt
+  }
+
+  def printUserWurf(w: Array[Int]): Int = {
+    println(w(0)+w(1))
+    println("Wähle eine der folgenden Kombination oder gebe das Spiel weiter mit 'N'")
+    val input = StdIn.readLine()
+    if (input == "N") return 1
     1 + input.toInt
   }
 

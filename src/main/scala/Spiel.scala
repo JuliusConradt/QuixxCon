@@ -21,22 +21,33 @@ class Spiel(val Spieler: Array[Spieler]) {
   }
 
   def nextRound():Unit = {
-    User = Master
+    val Wuerfel = new Wuerfel
+    val Wurf = Wuerfel.wuerfeln()
     Runde += 1
     Master = (Master + 1) % Spieler.length
-    TUI.printFieldTUI(Spieler(User),this)
-    val Wuerfel = new Wuerfel
-    var masterchoice = TUI.printWurfTUI(Wuerfel)
-    if(masterchoice == 0){
+    User = Master
+    TUI.printFieldTUI(Spieler(User), this)
+    var masterchoice = TUI.printWurfTUI(Wurf)
+    if (masterchoice == 0) {
       Spieler(User).Feld.fwcount += 1
-      //Next field
+      while (SubRound(Wurf)) {}
     } else if (masterchoice == 1) {
       //Farbige Kombinationen ausgeben
     } else {
       //Zum Spielfeld addieren
     }
-
   }
+
+    def SubRound(w: Array[Int]):Boolean = {
+      User = (User + 1) % Spieler.length
+      if (User == Master) return false
+      TUI.printFieldTUI(Spieler(User),this)
+      var userchoice = TUI.printUserWurf(w)
+      if (userchoice != 1){
+        //println("Kreuz ins Spielfeld setzen")
+      }
+      true
+    }
 
   def Ankreuzen(r: Reihe, wert: Int):Reihe = {
     if (r.Typ == 1 || r.Typ == 2){
