@@ -34,7 +34,7 @@ object TUI {
     println("Schreibe 'exit' wenn du alle Spieler erstellt hast")
     while(continue){
       count += 1
-      println("Spieler"+count+":")
+      println("Teilnehmer" +count+":")
       val input = StdIn.readLine()
       if (input == "exit" && count > 2) {
         continue = false
