@@ -27,19 +27,37 @@ class TUI {
     Spieler
   }
 
-  def ende(winner: String, points: Int): Unit =
-    println("\n" + "--- " + winner + " gewinnt mit " + points + " Punkten ---")
+  def ende(winner: Teilnehmer.Spieler, points: Int): Unit = {
+    println("\n" + "--- " + winner.name + " gewinnt mit " + points + " Punkten ---")
+    Feld(winner)
+  }
 
   def Rundenbeginn(Nr: Int, name: String): Unit =
     println("\nRunde " + Nr + " | Feld von Spieler: " + name)
 
-  def Antwort(a: Int):Int = {
-    var in = StdIn.readInt()
-    while (in > a+1) {
+//  def Antwort(a: Int):Int = {
+//    var in = StdIn.readInt()
+//    while (in > a+1) {
+//      println("Falsche Eingabe")
+//      in = StdIn.readInt()
+//    }
+//    in
+//  }
+
+  def Antwort(a:Int):Int = {
+    var in = StdIn.readLine()
+    try {
+    while (in.trim.isEmpty || in.toInt > a+1) {
       println("Falsche Eingabe")
-      in = StdIn.readInt()
+      in = StdIn.readLine()
     }
-    in
+      val out = in.toInt
+      out
+    } catch {
+      case _: NumberFormatException =>
+        println("Keine Zahl")
+        Antwort(a)
+    }
   }
 
   def Wurf(w: Array[Int]):String = {

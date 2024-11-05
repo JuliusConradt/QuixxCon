@@ -40,7 +40,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
         case 1 => {
           Feld(p)
           WurfAusgeben(Wurf)
-          Auswertung(Option2(Wurf,p),p)
+          Auswertung(Option2(Wurf,p),p, true)
         }
         case _ => {
           var count = 0
@@ -58,7 +58,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
           Ankreuzen(p,comb(location),location+1)
           Feld(p)
           WurfAusgeben(Wurf)
-          Auswertung(Option2(Wurf,p),p)
+          Auswertung(Option2(Wurf,p),p, false)
         }
       }
       User = (User + 1) % Spieler.length
@@ -77,13 +77,13 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
   def SubRound(p : Teilnehmer.Spieler, w: Array[Int], Nr: Int):Unit = {
     Rundenbeginn(Nr, p.name)
     Feld(p)
-    Auswertung(Option2(w,p),p)
+    Auswertung(Option2(w,p),p, false)
   }
-  def Auswertung(comb: Array[Int], p :Teilnehmer.Spieler): Unit = {
+  def Auswertung(comb: Array[Int], p :Teilnehmer.Spieler, b: Boolean): Unit = {
     val Anzahl = comb.count(_ != 0)
     val a = Antwort(Anzahl)
     a match {
-      case 0 => p.Feld.fwcount += 1
+      case 0 => if (b) p.Feld.fwcount += 1
       case _ => {
         var count = 0
         var location = 0

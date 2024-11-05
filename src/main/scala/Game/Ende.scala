@@ -18,7 +18,7 @@ class Ende {
         winner = i
       }
     }
-    TUI.ende(p(winner).name,top)
+    TUI.ende(p(winner),top)
   }
 
   def Reihenpunkte (n: Int):Int = {
