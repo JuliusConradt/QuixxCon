@@ -27,11 +27,20 @@ class TUI {
     Spieler
   }
 
-  def ende(winner: String): Unit =
-    println("Und der Sieger ist: " + winner)
+  def ende(winner: String, points: Int): Unit =
+    println("\n" + "--- " + winner + " gewinnt mit " + points + " Punkten ---")
 
   def Rundenbeginn(Nr: Int, name: String): Unit =
-    println("Runde " + Nr + " | Feld von Spieler: " + name)
+    println("\nRunde " + Nr + " | Feld von Spieler: " + name)
+
+  def Antwort(a: Int):Int = {
+    var in = StdIn.readInt()
+    while (in > a+1) {
+      println("Falsche Eingabe")
+      in = StdIn.readInt()
+    }
+    in
+  }
 
   def Wurf(w: Array[Int]):String = {
     val sb = new StringBuilder()
@@ -43,6 +52,27 @@ class TUI {
       green + w(4) + " " +
       blue + w(5) + white)
     sb.append("\n")
+    sb.toString()
+  }
+
+  def Option2(comb: Array[Int]):String = {
+    val sb = new StringBuilder()
+    sb.append("[0] F ")
+    var option = 0
+    for (i <- 0 to 7){
+      if (math.signum(comb(i)) > 0) {
+        option += 1
+        sb.append("["+option+"] ")
+        val farbe = i match {
+          case 0|1 => red
+          case 2|3 => yellow
+          case 4|5 => green
+          case 6|7 => blue
+        }
+        sb.append(farbe+comb(i)+white+" ")
+      }
+    }
+    sb.append(white+"\n")
     sb.toString()
   }
 
