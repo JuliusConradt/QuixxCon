@@ -29,7 +29,7 @@ class TUI {
 
   def ende(winner: Teilnehmer.Spieler, points: Int): Unit = {
     println("\n" + "--- " + winner.name + " gewinnt mit " + points + " Punkten ---")
-    Feld(winner)
+    println(Feld(winner))
   }
 
   def Rundenbeginn(Nr: Int, name: String): Unit =
