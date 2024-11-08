@@ -1,10 +1,10 @@
-package Game
+package Controller
 
 class Ende {
-  val TUI = new View.TUI
+  val TUI = new aView.TUI
 
 
-  def ende(p: Array[Teilnehmer.Spieler]):Unit = {
+  def ende(p: Array[Model.Spieler]):Unit = {
     var top = 0
     var winner = 0
     for (i <- 0 until p.length){

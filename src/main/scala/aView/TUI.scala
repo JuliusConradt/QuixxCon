@@ -1,4 +1,4 @@
-package View
+package aView
 import scala.io.StdIn
 import scala.math
 class TUI {
@@ -21,13 +21,13 @@ class TUI {
   def zuwenigspieler():Unit =
     println("Erstelle mindenstens 2 Spieler")
 
-  def Spielereinlesen(c:Int): Teilnehmer.Spieler = {
+  def Spielereinlesen(c:Int): Model.Spieler = {
     println("Spieler" + (c+1) + ":")
-    val Spieler = new Teilnehmer.Spieler(StdIn.readLine())
+    val Spieler = new Model.Spieler(StdIn.readLine())
     Spieler
   }
 
-  def ende(winner: Teilnehmer.Spieler, points: Int): Unit = {
+  def ende(winner: Model.Spieler, points: Int): Unit = {
     println("\n" + "--- " + winner.name + " gewinnt mit " + points + " Punkten ---")
     println(Feld(winner))
   }
@@ -115,7 +115,7 @@ class TUI {
     sb.toString()
   }
 
-  def Feld(p: Teilnehmer.Spieler):String = {
+  def Feld(p: Model.Spieler):String = {
     val sb = new StringBuilder()
     sb.append(red + mesh + "\n")
     sb.append(writeRedLine(p.Feld.Red))
@@ -136,7 +136,7 @@ class TUI {
     sb.toString()
   }
 
-  def writeRedLine(r:Teilnehmer.Reihe):String = {
+  def writeRedLine(r:Model.Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+red+"  ")
@@ -149,7 +149,7 @@ class TUI {
     sb.toString()
   }
 
-  def writeYellowLine(r:Teilnehmer.Reihe):String = {
+  def writeYellowLine(r:Model.Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+yellow+"  ")
@@ -162,7 +162,7 @@ class TUI {
     sb.toString()
   }
 
-  def writeGreenLine(r:Teilnehmer.Reihe):String = {
+  def writeGreenLine(r:Model.Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+green+"  ")
@@ -175,7 +175,7 @@ class TUI {
     sb.toString()
   }
 
-  def writeBlueLine(r:Teilnehmer.Reihe):String = {
+  def writeBlueLine(r:Model.Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+blue+"  ")

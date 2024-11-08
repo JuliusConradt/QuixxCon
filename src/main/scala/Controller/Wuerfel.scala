@@ -1,4 +1,4 @@
-package Game
+package Controller
 
 import scala.util.Random
 
