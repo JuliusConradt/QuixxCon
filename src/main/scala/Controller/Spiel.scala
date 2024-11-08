@@ -1,9 +1,9 @@
-package Game
+package Controller
 
-import View.TUI
+import aView.TUI
 import scala.util.control.Breaks._
 
-class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
+class Spiel(val Spieler:Array[Model.Spieler]){
 
   val TUI = new TUI
   val Wuerfel = new Wuerfel
@@ -18,7 +18,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
   var bclosed = false
   var beendet = false
 
-  def Spielstart():Array [Teilnehmer.Spieler] = {
+  def Spielstart():Array [Model.Spieler] = {
     var continue = false
     while (!continue) { //continue = beendet --> Später also !continue
       Runde += 1
@@ -27,7 +27,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
       continue = Round(Runde, Spieler(Master))
     }
 
-    def Round(Nr: Int, p: Teilnehmer.Spieler):Boolean = {
+    def Round(Nr: Int, p: Model.Spieler):Boolean = {
       val Wurf = Wuerfel.wuerfeln()
       Rundenbeginn(Nr,p.name)
       Feld(p)
@@ -74,12 +74,12 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
   }
 
 
-  def SubRound(p : Teilnehmer.Spieler, w: Array[Int], Nr: Int):Unit = {
+  def SubRound(p : Model.Spieler, w: Array[Int], Nr: Int):Unit = {
     Rundenbeginn(Nr, p.name)
     Feld(p)
     Auswertung(Option2(w,p),p, false)
   }
-  def Auswertung(comb: Array[Int], p :Teilnehmer.Spieler, b: Boolean): Unit = {
+  def Auswertung(comb: Array[Int], p :Model.Spieler, b: Boolean): Unit = {
     val Anzahl = comb.count(_ != 0)
     val a = Antwort(Anzahl)
     a match {
@@ -102,11 +102,12 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
     }
   }
 
-  def Ankreuzen(p: Teilnehmer.Spieler,n: Int, f: Int):Unit = {
+  def Ankreuzen(p: Model.Spieler, n: Int, f: Int):Unit = {
     f match {
       case 1 => {
         if(n==12 && p.Feld.Red.count >= 5) {
           p.Feld.Red.Kreuze(11) = true
+          p.Feld.Red.count += 1
           rclosed = true
           rowsclosed += 1
         }
@@ -116,6 +117,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
       case 2 => {
         if(n==12 && p.Feld.Yellow.count >= 5) {
           p.Feld.Yellow.Kreuze(11) = true
+          p.Feld.Yellow.count += 1
           yclosed = true
           rowsclosed += 1
         }
@@ -125,6 +127,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
       case 3 => {
         if(n==2 && p.Feld.Green.count >= 5) {
           p.Feld.Green.Kreuze(11) = true
+          p.Feld.Green.count += 1
           gclosed = true
           rowsclosed += 1
         }
@@ -134,6 +137,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
       case 4 => {
         if(n==2 && p.Feld.Blue.count >= 5) {
           p.Feld.Blue.Kreuze(11) = true
+          p.Feld.Blue.count += 1
           bclosed = true
           rowsclosed += 1
         }
@@ -149,13 +153,13 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
   def Rundenbeginn(Nr:Int, name:String):Unit =
     TUI.Rundenbeginn(Nr, name)
 
-  def Feld(p: Teilnehmer.Spieler):Unit =
+  def Feld(p: Model.Spieler):Unit =
     println(TUI.Feld(p))
 
   def WurfAusgeben(w: Array[Int]):Unit =
     println(TUI.Wurf(w))
 
-  def Option2(w: Array[Int], p: Teilnehmer.Spieler):Array[Int] = {
+  def Option2(w: Array[Int], p: Model.Spieler):Array[Int] = {
     val comb = Array.fill(8)(0)
     comb(0) = verfuegbar(p,1,(w(0)+w(2)))
     comb(1) = verfuegbar(p,1,(w(1)+w(2)))
@@ -171,7 +175,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
     println(TUI.Option2(comb))
     comb
   }
-  def Option1(w: Array[Int],p: Teilnehmer.Spieler):Array[Int] = {
+  def Option1(w: Array[Int],p: Model.Spieler):Array[Int] = {
     val sum = w(0)+w(1)
     val comb = Array.fill(4)(0)
     for (i <- 1 to 4) {
@@ -181,7 +185,7 @@ class Spiel(val Spieler:Array[Teilnehmer.Spieler]){
     comb
   }
 
-  def verfuegbar(p: Teilnehmer.Spieler, typ: Int, sum: Int):Int = {
+  def verfuegbar(p: Model.Spieler, typ: Int, sum: Int):Int = {
     var ret = sum
     var result = false
     if (typ < 3) {

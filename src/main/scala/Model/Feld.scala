@@ -1,4 +1,4 @@
-package Teilnehmer
+package Model
 
 class Feld {
   val Red = new Reihe(1)
