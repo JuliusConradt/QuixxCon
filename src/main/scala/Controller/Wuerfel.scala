@@ -17,4 +17,8 @@ class Wuerfel {
     Wurf
   }
 
+  def setValues(a : Array[Int]): Array[Int] = {
+    a
+  }
+
 }
