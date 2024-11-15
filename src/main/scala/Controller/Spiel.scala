@@ -150,11 +150,11 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     TUI.Antwort(a)
   }
 
+  def Feld(p: Model.Spieler): Unit = {
+    println(TUI.Feld(p))
+  }
   def Rundenbeginn(Nr:Int, name:String):Unit =
     TUI.Rundenbeginn(Nr, name)
-
-  def Feld(p: Model.Spieler):Unit =
-    println(TUI.Feld(p))
 
   def WurfAusgeben(w: Array[Int]):Unit =
     println(TUI.Wurf(w))
