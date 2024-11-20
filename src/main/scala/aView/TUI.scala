@@ -1,7 +1,7 @@
 package aView
 import scala.io.StdIn
 import scala.math
-class TUI {
+class TUI extends Observer {
 
   val red = "\u001B[31m"
   val yellow = "\u001B[33m"
@@ -188,4 +188,7 @@ class TUI {
     sb.toString()
   }
 
+  def update(spieler: Spieler): Unit = {
+    println(Feld(spieler))
+  }
 }

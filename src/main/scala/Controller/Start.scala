@@ -1,5 +1,6 @@
 package Controller
 
+import Controller.{Start, Ende, Spiel}
 import scala.collection.mutable.ArrayBuffer
 
 class Start {

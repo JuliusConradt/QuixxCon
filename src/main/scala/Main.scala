@@ -5,5 +5,4 @@ val Ende = new Controller.Ende
     val Spiel = new Controller.Spiel(Start.Start())
     Ende.ende(Spiel.Spielstart())
   }
-
 }

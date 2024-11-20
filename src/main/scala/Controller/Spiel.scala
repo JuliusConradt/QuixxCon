@@ -1,12 +1,20 @@
 package Controller
 
+import Controller.{Start, Ende, Spiel}
 import aView.TUI
+import Util.Observer
 import scala.util.control.Breaks._
 
-class Spiel(val Spieler:Array[Model.Spieler]){
+class Spiel(val Spieler:Array[Model.Spieler]) extends Observer{
 
   val TUI = new TUI
   val Wuerfel = new Wuerfel
+
+  Spieler.foreach(_.add(this))
+
+  def update(spieler: Model.Spieler): Unit = {
+    TUI.update(spieler)
+  }
 
   var Runde = 0
   var Master = -1
@@ -30,7 +38,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     def Round(Nr: Int, p: Model.Spieler):Boolean = {
       val Wurf = Wuerfel.wuerfeln()
       Rundenbeginn(Nr,p.name)
-      Feld(p)
+      TUI.update(p)
       WurfAusgeben(Wurf)
       val comb = Option1(Wurf,p)
       val Anzahl = comb.count(_ != 0)
@@ -38,7 +46,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
       a match {
         case 0 => p.Feld.fwcount += 1
         case 1 => {
-          Feld(p)
+          TUI.update(p)
           WurfAusgeben(Wurf)
           Auswertung(Option2(Wurf,p),p, true)
         }
@@ -56,7 +64,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
             }
           }
           Ankreuzen(p,comb(location),location+1)
-          Feld(p)
+          TUI.update(p)
           WurfAusgeben(Wurf)
           Auswertung(Option2(Wurf,p),p, false)
         }
@@ -76,7 +84,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
 
   def SubRound(p : Model.Spieler, w: Array[Int], Nr: Int):Unit = {
     Rundenbeginn(Nr, p.name)
-    Feld(p)
+    TUI.update(p)
     Auswertung(Option2(w,p),p, false)
   }
   def Auswertung(comb: Array[Int], p :Model.Spieler, b: Boolean): Unit = {

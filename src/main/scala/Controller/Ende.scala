@@ -1,5 +1,6 @@
 package Controller
 
+import Controller.{Start, Ende, Spiel}
 class Ende {
   val TUI = new aView.TUI
 
