@@ -44,8 +44,9 @@ jobs:
     - name: Run Tests with Coverage
       run: |
         sbt clean coverage test
-        sbt coverageReport
         sbt coverageAggregate
+        sbt coverageReport
+        
 
     - name: Upload Coverage Report
       if: success()
