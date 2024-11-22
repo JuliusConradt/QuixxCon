@@ -44,9 +44,10 @@ jobs:
     - name: test report
       run: sbt coverageReport
     - name: Submit to Coveralls
+      run: sbt coveralls
       env:
         COVERALLS_REPO_TOKEN: ${{secrets.COVERALLS_REPO_TOKEN }}
-      run: sbt coveralls
+      
 
       
   
