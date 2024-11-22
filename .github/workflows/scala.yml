@@ -7,9 +7,9 @@ name: Scala CI
 
 on:
   push:
-    branches: [ main, struktur, feature1 ]
+    branches: [ main, struktur, feature1, Observer ]
   pull_request:
-    branches: [ main, struktur, feature1 ]
+    branches: [ main, struktur, feature1, Observer ]
 
 jobs:
   build:
