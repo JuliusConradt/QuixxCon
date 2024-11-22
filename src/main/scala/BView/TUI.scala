@@ -186,7 +186,7 @@ class TUI extends Observer {
     }
     sb.append("| [")
     if (r.Kreuze(11)) sb.append(white+"X"+blue)
-    else sb.append("  ")
+    else sb.append(" cove ")
     sb.append("] |\n")
     sb.toString()
   }
