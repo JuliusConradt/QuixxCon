@@ -1,6 +1,6 @@
+import model.{Feld, Spieler}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import Model.Spieler
 
 
 class SpielerSpec extends AnyWordSpec with Matchers {
@@ -17,7 +17,7 @@ class SpielerSpec extends AnyWordSpec with Matchers {
       val spieler = new Spieler("John Doe")
 
       // Überprüfe, ob das Feld korrekt initialisiert wurde
-      spieler.Feld shouldBe a [Model.Feld] // Checkt, ob 'Feld' eine Instanz der Klasse 'Feld' ist
+      spieler.Feld shouldBe a [Feld] // Checkt, ob 'Feld' eine Instanz der Klasse 'Feld' ist
     }
   }
 }

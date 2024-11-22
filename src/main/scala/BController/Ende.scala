@@ -1,10 +1,12 @@
-package Controller
+package BController
+
+import model.Spieler
 
 class Ende {
-  val TUI = new aView.TUI
+  val TUI = new BView.TUI
 
 
-  def ende(p: Array[Model.Spieler]):Unit = {
+  def ende(p: Array[Spieler]):Unit = {
     var top = 0
     var winner = 0
     for (i <- 0 until p.length){

@@ -1,7 +1,8 @@
-package aView
+package BView
 import scala.io.StdIn
 import scala.math
-import util.Observer
+import BObserver.Observer
+import model.{Reihe, Spieler}
 
 class TUI extends Observer {
 
@@ -23,13 +24,13 @@ class TUI extends Observer {
   def zuwenigspieler():Unit =
     println("Erstelle mindenstens 2 Spieler")
 
-  def Spielereinlesen(c:Int): Model.Spieler = {
+  def Spielereinlesen(c:Int): Spieler = {
     println("Spieler" + (c+1) + ":")
-    val Spieler = new Model.Spieler(StdIn.readLine())
+    val Spieler = new Spieler(StdIn.readLine())
     Spieler
   }
 
-  def ende(winner: Model.Spieler, points: Int): Unit = {
+  def ende(winner: Spieler, points: Int): Unit = {
     println("\n" + "--- " + winner.name + " gewinnt mit " + points + " Punkten ---")
     println(Feld(winner))
   }
@@ -117,7 +118,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  def Feld(p: Model.Spieler):String = {
+  def Feld(p: Spieler):String = {
     val sb = new StringBuilder()
     sb.append(red + mesh + "\n")
     sb.append(writeRedLine(p.Feld.Red))
@@ -138,7 +139,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  def writeRedLine(r:Model.Reihe):String = {
+  def writeRedLine(r:Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+red+"  ")
@@ -151,7 +152,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  def writeYellowLine(r:Model.Reihe):String = {
+  def writeYellowLine(r:Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+yellow+"  ")
@@ -164,7 +165,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  def writeGreenLine(r:Model.Reihe):String = {
+  def writeGreenLine(r:Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+green+"  ")
@@ -177,7 +178,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  def writeBlueLine(r:Model.Reihe):String = {
+  def writeBlueLine(r:Reihe):String = {
     val sb = new StringBuilder()
     for (i <- 0 to 10){
       if(r.Kreuze(i)) sb.append("|  "+white+"X"+blue+"  ")
@@ -190,7 +191,7 @@ class TUI extends Observer {
     sb.toString()
   }
 
-  override def update(p:Model.Spieler): Unit = {
+  override def update(p:Spieler): Unit = {
     Feld(p)
   }
 }

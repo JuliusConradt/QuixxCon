@@ -1,8 +1,8 @@
-package aView
+package BView
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import Model.{Spieler, Reihe}
+import model.{Reihe, Spieler}
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 
 class TUISpec extends AnyWordSpec with Matchers {

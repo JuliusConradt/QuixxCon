@@ -1,5 +1,6 @@
-package Controller
+package BController
 
+import model.Spieler
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -9,13 +10,13 @@ class EndeSpec extends AnyWordSpec with Matchers {
 
     "correctly calculate the winner and call TUI.ende with the correct player and score" in {
       // Fake-TUI-Klasse zur Simulation
-      class FakeTUI extends aView.TUI {
+      class FakeTUI extends BView.TUI {
         var ended = false
-        var winnerPlayer: Model.Spieler = _
+        var winnerPlayer: Spieler = _
         var score: Int = _
 
         // Fake-Methode für ende
-        override def ende(player: Model.Spieler, points: Int): Unit = {
+        override def ende(player: Spieler, points: Int): Unit = {
           ended = true
           winnerPlayer = player
           score = points
@@ -26,19 +27,19 @@ class EndeSpec extends AnyWordSpec with Matchers {
       val fakeTUI = new FakeTUI
 
       // Erstelle Spieler mit Namen. Das Feld wird automatisch erzeugt.
-      val player1 = new Model.Spieler("Player1")
+      val player1 = new Spieler("Player1")
       player1.Feld.Red.count = 3
       player1.Feld.Yellow.count = 4
       player1.Feld.Green.count = 2
       player1.Feld.Blue.count = 1
 
-      val player2 = new Model.Spieler("Player2")
+      val player2 = new Spieler("Player2")
       player2.Feld.Red.count = 2
       player2.Feld.Yellow.count = 5
       player2.Feld.Green.count = 3
       player2.Feld.Blue.count = 4
 
-      val player3 = new Model.Spieler("Player3")
+      val player3 = new Spieler("Player3")
       player3.Feld.Red.count = 1
       player3.Feld.Yellow.count = 2
       player3.Feld.Green.count = 3

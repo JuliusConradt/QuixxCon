@@ -1,13 +1,13 @@
-package Controller
+package BController
 
+import model.Spieler
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import Model.Spieler
 import scala.collection.mutable.ArrayBuffer
 
 class StartSpec extends AnyWordSpec with Matchers {
   // Base test TUI to avoid console interactions
-  class TestTUI extends aView.TUI {
+  class TestTUI extends BView.TUI {
     override def Startansicht(): Unit = {}
     override def zuwenigspieler(): Unit = {}
     override def Spielereinlesen(c: Int): Spieler = new Spieler("")

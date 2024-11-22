@@ -1,8 +1,8 @@
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
-import Model.Spieler
-import Controller.Spiel
-import aView.TUI
+import BController.Spiel
+import BView.TUI
+import model.Spieler
 
 // Test implementation of TUI with enhanced response patterns
 class TestTUI extends TUI {
@@ -22,7 +22,7 @@ class TestTUI extends TUI {
   }
 
   override def Rundenbeginn(Nr: Int, name: String): Unit = {}
-  override def Feld(p: Model.Spieler): String = ""
+  override def Feld(p: Spieler): String = ""
   override def Wurf(w: Array[Int]): String = ""
   override def Option1(comb: Array[Int]): String = ""
   override def Option2(comb: Array[Int]): String = ""

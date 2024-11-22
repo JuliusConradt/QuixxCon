@@ -1,7 +1,9 @@
-package util
+package BObserver
+
+import model.Spieler
 
 trait Observer {
-  def update(p: Model.Spieler): Unit
+  def update(p: Spieler): Unit
 }
 
 class Observable {

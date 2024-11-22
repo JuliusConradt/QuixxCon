@@ -1,6 +1,6 @@
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import Model.{Feld, Reihe}
+import model.{Feld, Reihe}
 
 class FeldSpec extends AnyWordSpec with Matchers {
 

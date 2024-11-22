@@ -1,13 +1,14 @@
-package Controller
+package BController
 
-import aView.TUI
+import BView.TUI
+import model.{Spieler, Wuerfel}
+
 import scala.util.control.Breaks._
 
-class Spiel(val Spieler:Array[Model.Spieler]){
+class Spiel(val Spieler:Array[Spieler]){
 
   val TUI = new TUI
   val Wuerfel = new Wuerfel
-
   var Runde = 0
   var Master = -1
   var User = Master
@@ -18,7 +19,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
   var bclosed = false
   var beendet = false
 
-  def Spielstart():Array [Model.Spieler] = {
+  def Spielstart():Array [Spieler] = {
     var continue = false
     while (!continue) { //continue = beendet --> Später also !continue
       Runde += 1
@@ -27,7 +28,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
       continue = Round(Runde, Spieler(Master))
     }
 
-    def Round(Nr: Int, p: Model.Spieler):Boolean = {
+    def Round(Nr: Int, p: Spieler):Boolean = {
       val Wurf = Wuerfel.wuerfeln()
       Rundenbeginn(Nr,p.name)
       Feld(p)
@@ -74,12 +75,12 @@ class Spiel(val Spieler:Array[Model.Spieler]){
   }
 
 
-  def SubRound(p : Model.Spieler, w: Array[Int], Nr: Int):Unit = {
+  def SubRound(p : Spieler, w: Array[Int], Nr: Int):Unit = {
     Rundenbeginn(Nr, p.name)
     Feld(p)
     Auswertung(Option2(w,p),p, false)
   }
-  def Auswertung(comb: Array[Int], p :Model.Spieler, b: Boolean): Unit = {
+  def Auswertung(comb: Array[Int], p :Spieler, b: Boolean): Unit = {
     val Anzahl = comb.count(_ != 0)
     val a = Antwort(Anzahl)
     a match {
@@ -102,7 +103,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     }
   }
 
-  def Ankreuzen(p: Model.Spieler, n: Int, f: Int):Unit = {
+  def Ankreuzen(p: Spieler, n: Int, f: Int):Unit = {
     f match {
       case 1 => {
         if(n==12 && p.Feld.Red.count >= 5) {
@@ -150,7 +151,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     TUI.Antwort(a)
   }
 
-  def Feld(p: Model.Spieler): Unit = {
+  def Feld(p: Spieler): Unit = {
     println(TUI.Feld(p))
   }
   def Rundenbeginn(Nr:Int, name:String):Unit =
@@ -159,7 +160,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
   def WurfAusgeben(w: Array[Int]):Unit =
     println(TUI.Wurf(w))
 
-  def Option2(w: Array[Int], p: Model.Spieler):Array[Int] = {
+  def Option2(w: Array[Int], p: Spieler):Array[Int] = {
     val comb = Array.fill(8)(0)
     comb(0) = verfuegbar(p,1,(w(0)+w(2)))
     comb(1) = verfuegbar(p,1,(w(1)+w(2)))
@@ -175,7 +176,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     println(TUI.Option2(comb))
     comb
   }
-  def Option1(w: Array[Int],p: Model.Spieler):Array[Int] = {
+  def Option1(w: Array[Int],p: Spieler):Array[Int] = {
     val sum = w(0)+w(1)
     val comb = Array.fill(4)(0)
     for (i <- 1 to 4) {
@@ -185,7 +186,7 @@ class Spiel(val Spieler:Array[Model.Spieler]){
     comb
   }
 
-  def verfuegbar(p: Model.Spieler, typ: Int, sum: Int):Int = {
+  def verfuegbar(p: Spieler, typ: Int, sum: Int):Int = {
     var ret = sum
     var result = false
     if (typ < 3) {

@@ -1,4 +1,4 @@
-package Model
+package model
 
 class Feld {
   val Red = new Reihe(1)

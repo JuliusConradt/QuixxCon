@@ -1,14 +1,16 @@
-package Controller
+package BController
+
+import model.Spieler
 
 import scala.collection.mutable.ArrayBuffer
 
 class Start {
-  val TUI = new aView.TUI
-  val Spielerlistedynamic: ArrayBuffer[Model.Spieler] = ArrayBuffer()
+  val TUI = new BView.TUI
+  val Spielerlistedynamic: ArrayBuffer[Spieler] = ArrayBuffer()
 
-  def Start():Array[Model.Spieler] = {
+  def Start():Array[Spieler] = {
     Startansicht()
-    var Eingabe:Model.Spieler = Spielereinlesen(Spielerlistedynamic.length)
+    var Eingabe:Spieler = Spielereinlesen(Spielerlistedynamic.length)
     while (Eingabe.name != "" || Spielerlistedynamic.length < 2) {
       if (Eingabe.name != "") {
         Spielerlistedynamic += Eingabe
@@ -16,7 +18,7 @@ class Start {
         zuwenigspieler()
       Eingabe = Spielereinlesen(Spielerlistedynamic.length)
     }
-    val SpielerListe : Array[Model.Spieler] = Spielerlistedynamic.toArray
+    val SpielerListe : Array[Spieler] = Spielerlistedynamic.toArray
     SpielerListe
   }
 
@@ -29,7 +31,7 @@ class Start {
     TUI.zuwenigspieler()
   }
 
-  def Spielereinlesen(c:Int):(Model.Spieler) = {
+  def Spielereinlesen(c:Int):(Spieler) = {
     TUI.Spielereinlesen(c)
   }
 
