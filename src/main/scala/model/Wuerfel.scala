@@ -2,7 +2,7 @@ package model
 
 import scala.util.Random
 
-class Wuerfel {
+object Wuerfel {
 
   def random(): Int = { //Return: Zufälliger Integer von 1 bis 6
     val random = new Random()

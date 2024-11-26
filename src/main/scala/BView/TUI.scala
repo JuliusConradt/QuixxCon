@@ -1,10 +1,9 @@
 package BView
 import scala.io.StdIn
 import scala.math
-import BObserver.Observer
 import model.{Reihe, Spieler}
 
-class TUI extends Observer {
+class TUI {
 
   val red = "\u001B[31m"
   val yellow = "\u001B[33m"
@@ -190,8 +189,5 @@ class TUI extends Observer {
     sb.append("] |\n")
     sb.toString()
   }
-
-  override def update(p:Spieler): Unit = {
-    Feld(p)
-  }
+  
 }

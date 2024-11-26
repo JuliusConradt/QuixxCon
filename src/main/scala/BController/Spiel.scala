@@ -8,7 +8,6 @@ import scala.util.control.Breaks._
 class Spiel(val Spieler:Array[Spieler]){
 
   val TUI = new TUI
-  val Wuerfel = new Wuerfel
   var Runde = 0
   var Master = -1
   var User = Master
