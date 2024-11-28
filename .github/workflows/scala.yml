@@ -1,0 +1,62 @@
+name: Scala CI with Coverage
+
+on:
+  push:
+    branches:
+      - main
+      - Struktur
+      - Observer
+  pull_request:
+    branches:
+      - main
+      - Struktur
+      - Observer
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21' 
+        distribution: 'temurin'
+
+    - name: Set up sbt
+      uses: coursier/setup-action@v1
+      with:
+        apps: sbt
+
+    - name: Cache sbt dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.ivy2/cache
+          ~/.sbt
+          ~/.coursier
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt') }}-${{ hashFiles('**/project/build.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-sbt-
+
+    - name: Run Tests with Coverage
+      run: |
+        sbt clean coverage test
+        sbt coverageAggregate
+        sbt coverageReport
+        
+
+    - name: Upload Coverage Report
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: target/scala-*/scoverage-report
+
+    - name: Upload Coverage Report to Coveralls
+      run: sbt coveralls
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
