@@ -1,6 +1,6 @@
 package model
 
-import BView.TUI
+import view.TUI
 case class Status (
              spieler: Array[Spieler],
              Wurf: Array[Int],
