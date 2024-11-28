@@ -8,6 +8,7 @@ object Quixx {
     val controller = Controller(0)
     controller.start()
     controller.spiel()
+    controller.auswertung()
   }
 
 }

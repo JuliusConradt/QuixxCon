@@ -4,6 +4,7 @@ import model.StatusManager
 import model.Wuerfel
 import observer.Observer
 import view.TUI
+import scala.collection.mutable.ListBuffer
 class Controller(view: Int) {
   val View = view match {
     case 0 => new TUI()
@@ -13,7 +14,7 @@ class Controller(view: Int) {
 
   def start(): Unit = {
     val Spieler = View.start()
-    StatusManager.setStatus(model.Status(Spieler, Array(0), -1, 0, false, true, true, 0, false, false, false, false, false))
+    StatusManager.setStatus(model.Status(Spieler, Array(0), -1, 0, false, true, true, 0, false, false, false, false, false, false))
   }
 
   def spiel(): Unit = {
@@ -36,6 +37,8 @@ class Controller(view: Int) {
       option()
       StatusManager.setStatus(StatusManager.getStatus.copy(same = false))
     }
+    val newstatus = status()
+    if(newstatus.beendet) StatusManager.setStatus(newstatus.copy(print = true))
   }
 
   def ankreuzen(option: Int): Unit = {
@@ -49,7 +52,10 @@ class Controller(view: Int) {
         p.Feld.Red.Kreuze(11) = true
         p.Feld.Red.count += 1
         Status.spieler(Status.User) = p
-        StatusManager.setStatus(Status.copy(rclosed = true, rowsclosed = Status.rowsclosed + 1))
+        if (Status.rowsclosed+1 == 2)
+          StatusManager.setStatus(Status.copy(rclosed = true, rowsclosed = Status.rowsclosed + 1, beendet = true))
+        else  
+          StatusManager.setStatus(Status.copy(rclosed = true, rowsclosed = Status.rowsclosed + 1))
       val newstatus = status()
       newstatus.spieler(Status.User).Feld.Red.Kreuze(n-2) = true
       newstatus.spieler(Status.User).Feld.Red.count += 1
@@ -60,7 +66,10 @@ class Controller(view: Int) {
         p.Feld.Yellow.Kreuze(11) = true
         p.Feld.Yellow.count += 1
         Status.spieler(Status.User) = p
-        StatusManager.setStatus(Status.copy(yclosed = true, rowsclosed = Status.rowsclosed + 1))
+        if (Status.rowsclosed + 1 == 2)
+          StatusManager.setStatus(Status.copy(yclosed = true, rowsclosed = Status.rowsclosed + 1, beendet = true))
+        else
+          StatusManager.setStatus(Status.copy(yclosed = true, rowsclosed = Status.rowsclosed + 1))
       val newstatus = status()
       newstatus.spieler(Status.User).Feld.Yellow.Kreuze(n-2) = true
       newstatus.spieler(Status.User).Feld.Yellow.count += 1
@@ -71,7 +80,10 @@ class Controller(view: Int) {
         p.Feld.Green.Kreuze(11) = true
         p.Feld.Green.count += 1
         Status.spieler(Status.User) = p
-        StatusManager.setStatus(Status.copy(gclosed = true, rowsclosed = Status.rowsclosed + 1))
+        if (Status.rowsclosed + 1 == 2)
+          StatusManager.setStatus(Status.copy(gclosed = true, rowsclosed = Status.rowsclosed + 1, beendet = true))
+        else
+          StatusManager.setStatus(Status.copy(gclosed = true, rowsclosed = Status.rowsclosed + 1))
       val newstatus = status()
       newstatus.spieler(Status.User).Feld.Green.Kreuze(12-n) = true
       newstatus.spieler(Status.User).Feld.Green.count += 1
@@ -82,7 +94,10 @@ class Controller(view: Int) {
         p.Feld.Blue.Kreuze(11) = true
         p.Feld.Blue.count += 1
         Status.spieler(Status.User) = p
-        StatusManager.setStatus(Status.copy(bclosed = true, rowsclosed = Status.rowsclosed + 1))
+        if (Status.rowsclosed + 1 == 2)
+          StatusManager.setStatus(Status.copy(bclosed = true, rowsclosed = Status.rowsclosed + 1, beendet = true))
+        else
+          StatusManager.setStatus(Status.copy(bclosed = true, rowsclosed = Status.rowsclosed + 1))
       val newstatus = status()
       newstatus.spieler(Status.User).Feld.Blue.Kreuze(12-n) = true
       newstatus.spieler(Status.User).Feld.Blue.count += 1
@@ -154,7 +169,44 @@ class Controller(view: Int) {
     sum
   }
 
+  def auswertung(): Unit = {
+    observer.inform()
+  }
+  
+  def top():List[(Int, String)] = {
+    val Status = status()
+    val d: ListBuffer[(Int, String)] = ListBuffer.empty[(Int, String)]
+    for (i <- 0 to Status.spieler.length-1){
+      d += ((spielerpunkte(Status.spieler(i)),Status.spieler(i).name))
+    }
+    d.toList.sortBy(-_._1)
+  }
 
+  def spielerpunkte(p: model.Spieler): Int = {
+    reihenpunkte(p.Feld.Red) + reihenpunkte(p.Feld.Yellow) +
+      reihenpunkte(p.Feld.Green) + reihenpunkte(p.Feld.Blue) - 
+      p.Feld.fwcount*5
+  }
+  
+  def reihenpunkte(r: model.Reihe): Int = {
+    val count = r.count
+    val ret = count match {
+      case 0 => 0
+      case 1 => 1
+      case 2 => 3
+      case 3 => 6
+      case 4 => 10
+      case 5 => 15
+      case 6 => 21
+      case 7 => 28
+      case 8 => 36
+      case 9 => 45
+      case 10 => 55
+      case 11 => 66
+      case 12 => 78
+    }
+    ret
+  }
 
 
 

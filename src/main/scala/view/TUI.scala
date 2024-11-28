@@ -20,8 +20,71 @@ class TUI extends View{
 
   override def update(): Unit = {
     val Status = status()
-    field()
-    waitforaction(aktion())
+    if (Status.print)
+      val cont = controller.Controller(0)
+      siegerehrung(cont.top())
+    else
+      field()
+      waitforaction(aktion())
+  }
+
+  def siegerehrung(l: List[(Int, String)]): Unit = {
+    print("\n")
+    println("তততততততততততততততততততততততততততততততততততততততততততততততততততততততততত")
+    print("\n\n")
+
+    //TopRahmen
+    val namelaenge = l.head._2.length
+    val space = (73 - namelaenge) / 2
+    val shortspace = space - 7
+    val rahmenleange = (12 + namelaenge - 3)/2
+    val sb = StringBuilder()
+    sb.append(green)
+    for (i <- 0 to shortspace) sb.append(" ")
+    sb.append("┍")
+    for (i <- 0 to rahmenleange) sb.append("━")
+    sb.append("♔")
+    for (i <- 0 to rahmenleange) sb.append("━")
+    sb.append("┑")
+    sb.append(white)
+    println(sb.toString())
+
+    //Namenzeile
+    sb.clear()
+    for (i <- 0 to space) sb.append(" ")
+    sb.append(l.head._2)
+    println(sb.toString())
+
+    //BottomRahmen
+    sb.clear()
+    sb.append(green)
+    for (i <- 0 to shortspace) sb.append(" ")
+    sb.append("┕")
+    for (i <- 0 to rahmenleange) sb.append("━")
+    sb.append("♔")
+    for (i <- 0 to rahmenleange) sb.append("━")
+    sb.append("┙")
+    sb.append(white)
+    println(sb.toString())
+
+    //Spielerpunkte
+    print("\n\n")
+    println("┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈")
+    for (i <- 0 to (l.length-1)) spielerzeile(l(i),i+1)
+    println("┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈")
+
+    print("\n\n")
+    println("তততততততততততততততততততততততততততততততততততততততততততততততততততততততততত")
+    print("\n\n")
+  }
+  def spielerzeile(t: (Int, String), c: Int): Unit =  {
+    val sb = StringBuilder()
+    sb.append("        " + c + " ✦ ")
+    sb.append(String.format("%-" + 24 + "s", t._2))
+    sb.append("             ")
+    sb.append(String.format("%" + 3 + "s", t._1.toString))
+    sb.append(" PUNKTE")
+    println(sb.toString())
   }
 
   override def start(): Array[Spieler] = {
@@ -53,11 +116,11 @@ class TUI extends View{
   def waitforaction(options: Array[Int]): Unit = {
     //Funktion um korrekten Char einzulesen
     def readchar(): Char =
-      val eingabe = StdIn.readChar()
-      if (!options.contains(eingabe))
+      val eingabe = StdIn.readLine()
+      if (eingabe == null || eingabe.isEmpty || eingabe.length != 1 || !options.contains(eingabe.head))
         println("Ungültige Eingabe")
         readchar()
-      else eingabe
+      else eingabe.head
 
     val option = readchar().toInt - 98
     val cont = controller.Controller(0)
@@ -66,11 +129,10 @@ class TUI extends View{
     if (Status.whitedice && Status.colordice)
       if (option < 0)
         cont.fehlwurf()
-        StatusManager.setStatus(Status.copy(colordice=false))
+        StatusManager.setStatus(StatusManager.getStatus.copy(colordice = false))
       else if (option < 4)
         cont.ankreuzen(option)
-        StatusManager.setStatus(Status.copy(User = Status.User -1, whitedice=false, same= true))
-        
+        StatusManager.setStatus(StatusManager.getStatus.copy(User = Status.User -1, whitedice=false, same= true))
       else
         StatusManager.setStatus(Status.copy(colordice=false))
         cont.ankreuzen(option)
@@ -80,7 +142,7 @@ class TUI extends View{
     else if (!Status.whitedice && Status.colordice)
       if (option < 0)
         StatusManager.setStatus(Status.copy(colordice=false, same=false))
-      else if (option > 4)
+      else if (option > 3)
         StatusManager.setStatus(Status.copy(colordice=false, same=false))
         cont.ankreuzen(option)
   }

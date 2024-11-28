@@ -14,5 +14,6 @@ case class Status (
              yclosed: Boolean,
              gclosed: Boolean,
              bclosed: Boolean,
-             beendet: Boolean
+             beendet: Boolean,
+             print: Boolean
              )
