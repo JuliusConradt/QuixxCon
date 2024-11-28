@@ -18,5 +18,6 @@ class Spielfeld {
     sb.append(blue + mesh + "\n" + gbline + "\n" + mesh + "\n")
     sb.append(white + fails + "\n")
     sb.toString()
+    //end
   }
 }
